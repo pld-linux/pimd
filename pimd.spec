@@ -7,8 +7,6 @@ Version:	%{ver_a}_%{ver_b}
 Release:	2
 License:	Custom
 Group:		Networking/Daemons
-Group(de):	Netzwerkwesen/Server
-Group(pl):	Sieciowe/Serwery
 Source0:	http://catarina.usc.edu/pim/pimd/%{name}-%{ver_a}-%{ver_b}.tar.gz
 Source1:	%{name}.init
 Patch0:		%{name}-Makefile.patch
