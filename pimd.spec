@@ -3,7 +3,7 @@
 Summary:	Multicast routing daemon
 Name:		pimd
 Version:	%{ver_a}_%{ver_b}
-Release:	0
+Release:	1
 License:	Custom
 Group:		Networking/Daemons
 Group(pl):	Sieciowe/Serwery
@@ -29,9 +29,11 @@ make
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_sysconfdir}/rc.d/init.d,%{_sbindir},%{_mandir}/man8}
+
 install pimd $RPM_BUILD_ROOT%{_sbindir}
 install pimd.conf $RPM_BUILD_ROOT%{_sysconfdir}
 install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/rc.d/init.d/pimd
+
 gzip -9nf README LICENSE* RELEASE.NOTES CHANGES BUGS.TODO 
 
 %post
