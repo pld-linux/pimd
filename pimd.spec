@@ -8,6 +8,7 @@ Release:	2
 License:	custom
 Group:		Networking/Daemons
 Source0:	http://catarina.usc.edu/pim/pimd/%{name}-%{ver_a}-%{ver_b}.tar.gz
+# Source0-md5:	05a0f591434b8ed0051132112159a59f
 Source1:	%{name}.init
 Patch0:		%{name}-Makefile.patch
 URL:		http://catarina.usc.edu/pim/
