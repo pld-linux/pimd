@@ -11,7 +11,7 @@ Source0:	http://catarina.usc.edu/pim/pimd/%{name}-%{ver_a}-%{ver_b}.tar.gz
 Source1:	%{name}.init	
 Patch0:		pimd-Makefile.patch
 Prereq:		/sbin/chkconfig
-Requires:	rc-scripts
+Prereq:		rc-scripts
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
