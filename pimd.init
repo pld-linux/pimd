@@ -42,7 +42,7 @@ case "$1" in
 		msg_already_running pimd
 	fi
 	;;
-  stop)	
+  stop)
 	if [ -f /var/lock/subsys/pimd ]; then
 		show "Stopping PIM-SM multicast routing daemon"
 		killproc pimd
