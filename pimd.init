@@ -24,7 +24,7 @@ else
 fi
 
 # Get service config
-if [ -f /etc/sysconfig/pimd ] ; then
+if [ -f /etc/sysconfig/pimd ]; then
 	. /etc/sysconfig/pimd
 fi
 
