@@ -24,7 +24,7 @@ specification (RFC 2362) with a few noted exceptions.
 %patch0 -p1
 
 %build
-make 
+%{__make} 
 
 %install
 rm -rf $RPM_BUILD_ROOT
