@@ -5,7 +5,7 @@ Summary(pl):	Demon routingu multicastowego
 Name:		pimd
 Version:	%{ver_a}_%{ver_b}
 Release:	2
-License:	Custom
+License:	custom
 Group:		Networking/Daemons
 Source0:	http://catarina.usc.edu/pim/pimd/%{name}-%{ver_a}-%{ver_b}.tar.gz
 Source1:	%{name}.init
