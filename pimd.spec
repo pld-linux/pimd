@@ -34,11 +34,11 @@ wyj±tkami.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_sysconfdir}/rc.d/init.d,%{_sbindir},%{_mandir}/man8}
+install -d $RPM_BUILD_ROOT{/etc/rc.d/init.d,%{_sbindir},%{_mandir}/man8}
 
 install pimd $RPM_BUILD_ROOT%{_sbindir}
 install pimd.conf $RPM_BUILD_ROOT%{_sysconfdir}
-install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/rc.d/init.d/pimd
+install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/pimd
 
 
 %clean
