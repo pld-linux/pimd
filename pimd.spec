@@ -11,6 +11,7 @@ Source0:	http://catarina.usc.edu/pim/pimd/%{name}-%{ver_a}-%{ver_b}.tar.gz
 # Source0-md5:	05a0f591434b8ed0051132112159a59f
 Source1:	%{name}.init
 Patch0:		%{name}-Makefile.patch
+Patch1:		%{name}-time.patch
 URL:		http://catarina.usc.edu/pim/
 PreReq:		rc-scripts
 Requires(post,preun):	/sbin/chkconfig
@@ -29,9 +30,14 @@ wyj±tkami.
 %prep
 %setup -q -n %{name}-%{ver_a}-%{ver_b}
 %patch0 -p1
+%patch1 -p1
+
+# these files are outdated (conflicting with current glibc)
+rm -f include/linux/netinet/in*
 
 %build
-%{__make}
+%{__make} \
+	CC="%{__cc} %{rpmcflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
