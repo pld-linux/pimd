@@ -40,7 +40,6 @@ install pimd $RPM_BUILD_ROOT%{_sbindir}
 install pimd.conf $RPM_BUILD_ROOT%{_sysconfdir}
 install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/rc.d/init.d/pimd
 
-gzip -9nf README LICENSE* RELEASE.NOTES CHANGES BUGS.TODO
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -63,7 +62,7 @@ fi
 
 %files
 %defattr(644,root,root,755)
-%doc *.gz
+%doc README LICENSE* RELEASE.NOTES CHANGES BUGS.TODO
 %attr(755,root,root) %{_sbindir}/*
 %attr(754,root,root) /etc/rc.d/init.d/*
 %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/pimd.conf
