@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# pimd        Starts pimd.
+# pimd		Starts pimd.
 #
 #
 # chkconfig:	2345 85 40
@@ -13,10 +13,21 @@
 # Get network config
 . /etc/sysconfig/network
 
+# Check that networking is up.
+if is_yes "${NETWORKING}"; then
+	if [ ! -f /var/lock/subsys/network ]; then
+		msg_network_down pimd
+		exit 1
+	fi
+else
+	exit 0
+fi
+
 # Get service config
 if [ -f /etc/sysconfig/pimd ] ; then
-        . /etc/sysconfig/pimd
+	. /etc/sysconfig/pimd
 fi
+
 
 # See how we were called.
 case "$1" in
@@ -25,30 +36,41 @@ case "$1" in
 	if [ ! -f /var/lock/subsys/pimd ]; then
 		show "Starting PIM-SM multicast routing daemon"
 		daemon pimd
+		touch /var/lock/subsys/pimd
 	else
-		echo "pimd already is running"
+		msg_already_running pimd
+		exit 1
 	fi
-	touch /var/lock/subsys/pimd
 	;;
-    stop)	
-	show "Stopping PIM-SM multicast routing daemon"
-	killproc pimd
-	rm -f /var/lock/subsys/pimd
+  stop)	
+	if [ -f /var/lock/subsys/pimd ]; then
+		show "Stopping PIM-SM multicast routing daemon"
+		killproc pimd
+		rm -f /var/lock/subsys/pimd
+	else
+		msg_not_running pimd
+		exit 1
+	fi
 	;;
   status)
 	status pimd
 	;;
   reload)
-	killproc pimd -HUP
+	if [ -f /var/lock/subsys/pimd ]; then
+		show "Reloading PIM-SM multicast routing daemon"
+		killproc pimd -HUP
+	else
+		msg_not_running pimd
+		exit 1
+	fi
 	;;
   restart)
 	$0 stop
 	$0 start
 	;;
   *)
-	echo "Usage: $0 {start|stop|status|restart|reload}"
+	echo "Usage: $0 {start|stop|restart|reload|status}"
 	exit 1
 esac
 
 exit 0
-
