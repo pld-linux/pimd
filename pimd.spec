@@ -30,7 +30,7 @@ wyj±tkami.
 %patch0 -p1
 
 %build
-%{__make} 
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -40,19 +40,19 @@ install pimd $RPM_BUILD_ROOT%{_sbindir}
 install pimd.conf $RPM_BUILD_ROOT%{_sysconfdir}
 install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/rc.d/init.d/pimd
 
-gzip -9nf README LICENSE* RELEASE.NOTES CHANGES BUGS.TODO 
+gzip -9nf README LICENSE* RELEASE.NOTES CHANGES BUGS.TODO
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %post
-/sbin/chkconfig --add pimd 
+/sbin/chkconfig --add pimd
 if [ -f /var/lock/subsys/pimd ]; then
 	/etc/rc.d/init.d/pimd restart >&2
 else
 	echo "Run '/etc/rc.d/init.d/pimd start' to start routing deamon." >&2
 fi
-    
+
 %preun
 if [ "$1" = "0" ]; then
 	if [ -f /var/lock/subsys/pimd ]; then
