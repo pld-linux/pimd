@@ -1,15 +1,18 @@
 %define	ver_a 2.1.0
 %define	ver_b alpha28
 Summary:	Multicast routing daemon
+Summary(pl):	Demon routingu multicastowego
 Name:		pimd
 Version:	%{ver_a}_%{ver_b}
-Release:	1
+Release:	2
 License:	Custom
 Group:		Networking/Daemons
+Group(de):	Netzwerkwesen/Server
 Group(pl):	Sieciowe/Serwery
 Source0:	http://catarina.usc.edu/pim/pimd/%{name}-%{ver_a}-%{ver_b}.tar.gz
-Source1:	%{name}.init	
-Patch0:		pimd-Makefile.patch
+Source1:	%{name}.init
+Patch0:		%{name}-Makefile.patch
+URL:		http://catarina.usc.edu/pim/
 Prereq:		/sbin/chkconfig
 Prereq:		rc-scripts
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -18,6 +21,11 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 pimd is a lightweight, stand-alone PIM-Sparse Mode implementation that
 may be freely distributed or deployed. pimd implements the full PIM-SM
 specification (RFC 2362) with a few noted exceptions.
+
+%description -l pl
+pimd jest niewielk±, samodzieln± implementacj± PIM-Sparse Mode. pimd
+ma zaimplementowan± pe³n± specyfikacjê PIM-SM (RFC 2362) z kilkoma
+wyj±tkami.
 
 %prep
 %setup -q -n %{name}-%{ver_a}-%{ver_b}
@@ -36,9 +44,11 @@ install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/rc.d/init.d/pimd
 
 gzip -9nf README LICENSE* RELEASE.NOTES CHANGES BUGS.TODO 
 
+%clean
+rm -rf $RPM_BUILD_ROOT
+
 %post
 /sbin/chkconfig --add pimd 
-
 if [ -f /var/lock/subsys/pimd ]; then
 	/etc/rc.d/init.d/pimd restart >&2
 else
@@ -52,9 +62,6 @@ if [ "$1" = "0" ]; then
 	fi
         /sbin/chkconfig --del pimd >&2
 fi
-
-%clean
-rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
