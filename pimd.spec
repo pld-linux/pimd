@@ -63,7 +63,7 @@ if [ "$1" = "0" ]; then
 	if [ -f /var/lock/subsys/pimd ]; then
 		/etc/rc.d/init.d/pimd stop >&2
 	fi
-        /sbin/chkconfig --del pimd >&2
+	/sbin/chkconfig --del pimd >&2
 fi
 
 %files
