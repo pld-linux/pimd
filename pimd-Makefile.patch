@@ -1,0 +1,21 @@
+diff -durN pimd-2.1.0-alpha28.orig/Makefile pimd-2.1.0-alpha28/Makefile
+--- pimd-2.1.0-alpha28.orig/Makefile	Wed Mar  8 10:10:52 2000
++++ pimd-2.1.0-alpha28/Makefile	Mon Jun 12 18:03:16 2000
+@@ -67,7 +67,7 @@
+ 
+ ## FreeBSD	-D__FreeBSD__ is defined by the OS
+ ## FreeBSD-3.x
+-CFLAGS= -Wall	-g	-Iinclude/freebsd ${COMMON_CFLAGS}
++#CFLAGS= -Wall	-g	-Iinclude/freebsd ${COMMON_CFLAGS}
+ ## FreeBSD-2.x
+ #CFLAGS= -Wall	-g	-Iinclude/freebsd2 ${COMMON_CFLAGS}
+ 
+@@ -106,7 +106,7 @@
+ #CFLAGS= -Wall -g -Dold_Linux ${LINUX_INCLUDE} ${LINUX_DEFS} ${COMMON_CFLAGS}
+ 
+ ## Newer Linux (linux-2.1.127 for example)
+-#CFLAGS= -Wall -g ${LINUX_INCLUDE} ${LINUX_DEFS} ${COMMON_CFLAGS}
++CFLAGS= -Wall ${LINUX_INCLUDE} ${LINUX_DEFS} ${COMMON_CFLAGS}
+ 
+ 
+ LIBS=		${SNMPLIBDIR} ${SNMPLIBS} ${LIB2}
