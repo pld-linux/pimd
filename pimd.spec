@@ -12,8 +12,8 @@ Source0:	http://catarina.usc.edu/pim/pimd/%{name}-%{ver_a}-%{ver_b}.tar.gz
 Source1:	%{name}.init
 Patch0:		%{name}-Makefile.patch
 URL:		http://catarina.usc.edu/pim/
-Prereq:		/sbin/chkconfig
-Prereq:		rc-scripts
+PreReq:		rc-scripts
+Requires(post,preun):	/sbin/chkconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -40,7 +40,6 @@ install -d $RPM_BUILD_ROOT{/etc/rc.d/init.d,%{_sbindir},%{_mandir}/man8}
 install pimd $RPM_BUILD_ROOT%{_sbindir}
 install pimd.conf $RPM_BUILD_ROOT%{_sysconfdir}
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/pimd
-
 
 %clean
 rm -rf $RPM_BUILD_ROOT
