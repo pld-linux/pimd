@@ -28,7 +28,7 @@ if [ -f /etc/sysconfig/pimd ] ; then
 	. /etc/sysconfig/pimd
 fi
 
-
+RETVAL=0
 # See how we were called.
 case "$1" in
   start)
@@ -36,10 +36,10 @@ case "$1" in
 	if [ ! -f /var/lock/subsys/pimd ]; then
 		show "Starting PIM-SM multicast routing daemon"
 		daemon pimd
-		touch /var/lock/subsys/pimd
+		RETVAL=$?
+		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/pimd
 	else
 		msg_already_running pimd
-		exit 1
 	fi
 	;;
   stop)	
@@ -49,28 +49,30 @@ case "$1" in
 		rm -f /var/lock/subsys/pimd
 	else
 		msg_not_running pimd
-		exit 1
 	fi
 	;;
   status)
 	status pimd
+	exit $?
 	;;
-  reload)
+  reload|force-reload)
 	if [ -f /var/lock/subsys/pimd ]; then
 		show "Reloading PIM-SM multicast routing daemon"
 		killproc pimd -HUP
+		RETVAL=$?
 	else
-		msg_not_running pimd
-		exit 1
+		msg_not_running pimd >&2
+		exit 7
 	fi
 	;;
   restart)
 	$0 stop
 	$0 start
+	exit $?
 	;;
   *)
-	echo "Usage: $0 {start|stop|restart|reload|status}"
-	exit 1
+	echo "Usage: $0 {start|stop|restart|reload|force-reload|status}"
+	exit 3
 esac
 
-exit 0
+exit $RETVAL
