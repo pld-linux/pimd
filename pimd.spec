@@ -37,10 +37,21 @@ install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/rc.d/init.d/pimd
 gzip -9nf README LICENSE* RELEASE.NOTES CHANGES BUGS.TODO 
 
 %post
-DESC="routing daemon"; %chkconfig_add
+/sbin/chkconfig --add pimd 
+
+if [ -f /var/lock/subsys/pimd ]; then
+	/etc/rc.d/init.d/pimd restart >&2
+else
+	echo "Run '/etc/rc.d/init.d/pimd start' to start routing deamon." >&2
+fi
     
 %preun
-%chkconfig_del
+if [ "$1" = "0" ]; then
+	if [ -f /var/lock/subsys/pimd ]; then
+		/etc/rc.d/init.d/pimd stop >&2
+	fi
+        /sbin/chkconfig --del pimd >&2
+fi
 
 %clean
 rm -rf $RPM_BUILD_ROOT
