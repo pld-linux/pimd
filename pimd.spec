@@ -13,8 +13,8 @@ Source1:	%{name}.init
 Patch0:		%{name}-Makefile.patch
 Patch1:		%{name}-time.patch
 URL:		http://catarina.usc.edu/pim/
-PreReq:		rc-scripts
 Requires(post,preun):	/sbin/chkconfig
+Requires:	rc-scripts
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -71,4 +71,4 @@ fi
 %doc README LICENSE* RELEASE.NOTES CHANGES BUGS.TODO
 %attr(755,root,root) %{_sbindir}/*
 %attr(754,root,root) /etc/rc.d/init.d/*
-%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/pimd.conf
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/pimd.conf
