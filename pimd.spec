@@ -55,7 +55,7 @@ rm -rf $RPM_BUILD_ROOT
 if [ -f /var/lock/subsys/pimd ]; then
 	/etc/rc.d/init.d/pimd restart >&2
 else
-	echo "Run '/etc/rc.d/init.d/pimd start' to start routing deamon." >&2
+	echo "Run '/etc/rc.d/init.d/pimd start' to start routing daemon." >&2
 fi
 
 %preun
