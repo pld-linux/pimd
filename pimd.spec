@@ -1,7 +1,7 @@
 %define	ver_a 2.1.0
 %define	ver_b alpha28
 Summary:	Multicast routing daemon
-Summary(pl):	Demon routingu multicastowego
+Summary(pl.UTF-8):   Demon routingu multicastowego
 Name:		pimd
 Version:	%{ver_a}_%{ver_b}
 Release:	2
@@ -22,10 +22,10 @@ pimd is a lightweight, stand-alone PIM-Sparse Mode implementation that
 may be freely distributed or deployed. pimd implements the full PIM-SM
 specification (RFC 2362) with a few noted exceptions.
 
-%description -l pl
-pimd jest niewielk±, samodzieln± implementacj± PIM-Sparse Mode. pimd
-ma zaimplementowan± pe³n± specyfikacjê PIM-SM (RFC 2362) z kilkoma
-wyj±tkami.
+%description -l pl.UTF-8
+pimd jest niewielkÄ…, samodzielnÄ… implementacjÄ… PIM-Sparse Mode. pimd
+ma zaimplementowanÄ… peÅ‚nÄ… specyfikacjÄ™ PIM-SM (RFC 2362) z kilkoma
+wyjÄ…tkami.
 
 %prep
 %setup -q -n %{name}-%{ver_a}-%{ver_b}
