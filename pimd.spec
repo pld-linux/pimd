@@ -1,7 +1,7 @@
 %define	ver_a 2.1.0
 %define	ver_b alpha28
 Summary:	Multicast routing daemon
-Summary(pl.UTF-8):   Demon routingu multicastowego
+Summary(pl.UTF-8):	Demon routingu multicastowego
 Name:		pimd
 Version:	%{ver_a}_%{ver_b}
 Release:	2
