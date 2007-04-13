@@ -13,6 +13,7 @@ Source1:	%{name}.init
 Patch0:		%{name}-Makefile.patch
 Patch1:		%{name}-time.patch
 URL:		http://catarina.usc.edu/pim/
+BuildRequires:	rpmbuild(macros) >= 1.268
 Requires(post,preun):	/sbin/chkconfig
 Requires:	rc-scripts
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -52,17 +53,11 @@ rm -rf $RPM_BUILD_ROOT
 
 %post
 /sbin/chkconfig --add pimd
-if [ -f /var/lock/subsys/pimd ]; then
-	/etc/rc.d/init.d/pimd restart >&2
-else
-	echo "Run '/etc/rc.d/init.d/pimd start' to start routing daemon." >&2
-fi
+%service pimd restart
 
 %preun
 if [ "$1" = "0" ]; then
-	if [ -f /var/lock/subsys/pimd ]; then
-		/etc/rc.d/init.d/pimd stop >&2
-	fi
+	%service pimd stop
 	/sbin/chkconfig --del pimd >&2
 fi
 
